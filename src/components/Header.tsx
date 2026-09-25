@@ -76,7 +76,7 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
 
         {/* Desktop Navigation Tabs */}
-        <nav className="hidden xl:flex items-center gap-1 p-1 bg-[#f5eced] rounded-lg border border-[#dec0bb]/60">
+        <nav className="hidden lg:flex items-center gap-1 p-1 bg-[#f5eced] rounded-lg border border-[#dec0bb]/60">
           {navItems.map((item) => {
             const isActive = currentScreen === item.id;
             return (
@@ -99,7 +99,7 @@ export const Header: React.FC<HeaderProps> = ({
         <div className="flex items-center gap-2">
           <button
             onClick={onOpenSearch}
-            className="flex items-center bg-white px-3 py-1.5 rounded-lg border border-[#dec0bb] shadow-[0_1px_3px_rgba(35,31,32,0.04)] w-48 sm:w-60 lg:w-72 text-left hover:border-[#8b261d] transition-colors group"
+            className="flex items-center bg-white px-3 py-1.5 rounded-lg border border-[#dec0bb] shadow-[0_1px_3px_rgba(35,31,32,0.04)] w-36 sm:w-56 lg:w-72 text-left hover:border-[#8b261d] transition-colors group"
             title="Pesquisar no Acervo (Atalho ⌘K)"
           >
             <span className="material-symbols-outlined text-[18px] text-[#57423f] mr-2 group-hover:text-[#6b0d09]">
@@ -108,7 +108,7 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="text-xs sm:text-sm text-[#57423f]/70 flex-grow truncate">
               Pesquisar acervo ou fotos...
             </span>
-            <kbd className="text-[10px] font-semibold text-[#57423f]/80 bg-[#efe6e7] px-1.5 py-0.5 rounded border border-[#dec0bb]/80 shadow-xs">
+            <kbd className="hidden sm:inline text-[10px] font-semibold text-[#57423f]/80 bg-[#efe6e7] px-1.5 py-0.5 rounded border border-[#dec0bb]/80 shadow-xs">
               ⌘K
             </kbd>
           </button>
@@ -123,7 +123,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="xl:hidden p-2 rounded-lg text-[#57423f] hover:bg-[#efe6e7] hover:text-[#6b0d09] transition-colors"
+            className="lg:hidden p-2 rounded-lg text-[#57423f] hover:bg-[#efe6e7] hover:text-[#6b0d09] transition-colors"
             aria-label="Abrir menu móvel"
           >
             <span className="material-symbols-outlined text-[24px]">
@@ -135,7 +135,7 @@ export const Header: React.FC<HeaderProps> = ({
 
       {/* Mobile Menu Drawer */}
       {mobileMenuOpen && (
-        <div className="xl:hidden bg-[#fff8f8] border-b border-[#dec0bb] px-4 py-3 shadow-lg flex flex-col gap-1 animate-fadeIn">
+        <div className="lg:hidden bg-[#fff8f8] border-b border-[#dec0bb] px-4 py-3 shadow-lg flex flex-col gap-1 animate-fadeIn">
           {navItems.map((item) => {
             const isActive = currentScreen === item.id;
             return (
