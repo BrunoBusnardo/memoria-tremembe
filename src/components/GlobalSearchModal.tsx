@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { archivalItems, featuredDocument } from '../data/acervoData';
 import { historyModules } from '../data/historyData';
-import { lessonPlans } from '../data/pedagogicalData';
+import { lessonPlans, pedagogicalProposals } from '../data/pedagogicalData';
+import { publicationsData } from '../data/publicationsData';
+import { timelineData } from '../data/timelineData';
 import { NavScreen, ArchivalItem } from '../types';
 
 interface GlobalSearchModalProps {
@@ -57,7 +59,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
           (doc.fotografo && doc.fotografo.toLowerCase().includes(normalizedQuery)) ||
           doc.fundo.toLowerCase().includes(normalizedQuery)
       )
-    : allItems.slice(0, 4);
+    : allItems.slice(0, 3);
 
   const matchedHistory = normalizedQuery
     ? historyModules.filter(
@@ -67,7 +69,18 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
           mod.periodo.toLowerCase().includes(normalizedQuery) ||
           mod.codigoFoto.toLowerCase().includes(normalizedQuery)
       )
-    : historyModules.slice(0, 3);
+    : historyModules.slice(0, 2);
+
+  const matchedTimeline = normalizedQuery
+    ? timelineData.filter(
+        (node) =>
+          node.titulo.toLowerCase().includes(normalizedQuery) ||
+          node.subtitulo.toLowerCase().includes(normalizedQuery) ||
+          node.desc.toLowerCase().includes(normalizedQuery) ||
+          node.ano.toLowerCase().includes(normalizedQuery) ||
+          node.categoria.toLowerCase().includes(normalizedQuery)
+      )
+    : timelineData.slice(0, 2);
 
   const matchedLessons = normalizedQuery
     ? lessonPlans.filter(
@@ -78,6 +91,17 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
           plan.objetivoCentral.toLowerCase().includes(normalizedQuery)
       )
     : lessonPlans.slice(0, 2);
+
+  const matchedPubs = normalizedQuery
+    ? publicationsData.filter(
+        (pub) =>
+          pub.titulo.toLowerCase().includes(normalizedQuery) ||
+          pub.autor.toLowerCase().includes(normalizedQuery) ||
+          pub.resumo.toLowerCase().includes(normalizedQuery) ||
+          pub.tipo.toLowerCase().includes(normalizedQuery) ||
+          pub.palavrasChave.some((k) => k.toLowerCase().includes(normalizedQuery))
+      )
+    : publicationsData.slice(0, 2);
 
   return (
     <div className="fixed inset-0 z-50 bg-[#1e1b1c]/80 backdrop-blur-sm flex items-start justify-center pt-16 sm:pt-24 px-4 pb-6 animate-fadeIn">
@@ -202,6 +226,94 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                     </span>
                     <span className="text-xs sm:text-sm font-semibold text-[#1e1b1c] group-hover:text-[#6b0d09] truncate">
                       {mod.titulo}
+                    </span>
+                  </div>
+                  <span className="material-symbols-outlined text-[18px] text-[#57423f]/50 group-hover:text-[#6b0d09]">
+                    arrow_forward
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Timeline / Cronologia section */}
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[11px] font-bold text-[#775a19] uppercase tracking-wider flex items-center gap-1">
+                <span className="material-symbols-outlined text-[15px]">timeline</span>
+                Cronologia &amp; Marcos Históricos ({matchedTimeline.length})
+              </span>
+              <button
+                onClick={() => {
+                  onNavigate('historia-de-tremembe');
+                  onClose();
+                }}
+                className="text-[11px] text-[#6b0d09] hover:underline font-semibold"
+              >
+                Ver Linha do Tempo
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              {matchedTimeline.map((node) => (
+                <div
+                  key={node.id}
+                  onClick={() => {
+                    onNavigate('historia-de-tremembe');
+                    onClose();
+                  }}
+                  className="p-2.5 rounded-lg bg-[#fff8f8] hover:bg-[#f5eced] border border-[#dec0bb]/60 cursor-pointer flex items-center justify-between gap-2 transition-colors group"
+                >
+                  <div className="flex flex-col truncate">
+                    <span className="text-[10px] font-mono font-bold text-[#775a19]">
+                      Ano {node.ano} • {node.categoria}
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#1e1b1c] group-hover:text-[#6b0d09] truncate">
+                      {node.titulo}
+                    </span>
+                  </div>
+                  <span className="material-symbols-outlined text-[18px] text-[#57423f]/50 group-hover:text-[#6b0d09]">
+                    arrow_forward
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Publications section */}
+          <div>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[11px] font-bold text-[#775a19] uppercase tracking-wider flex items-center gap-1">
+                <span className="material-symbols-outlined text-[15px]">menu_book</span>
+                Publicações &amp; Artigos ({matchedPubs.length})
+              </span>
+              <button
+                onClick={() => {
+                  onNavigate('publicacoes-e-artigos');
+                  onClose();
+                }}
+                className="text-[11px] text-[#6b0d09] hover:underline font-semibold"
+              >
+                Ver Publicações
+              </button>
+            </div>
+
+            <div className="flex flex-col gap-1.5">
+              {matchedPubs.map((pub) => (
+                <div
+                  key={pub.id}
+                  onClick={() => {
+                    onNavigate('publicacoes-e-artigos');
+                    onClose();
+                  }}
+                  className="p-2.5 rounded-lg bg-[#fff8f8] hover:bg-[#f5eced] border border-[#dec0bb]/60 cursor-pointer flex items-center justify-between gap-2 transition-colors group"
+                >
+                  <div className="flex flex-col truncate">
+                    <span className="text-[10px] uppercase font-bold text-[#775a19]">
+                      {pub.tipo} • {pub.ano} ({pub.autor})
+                    </span>
+                    <span className="text-xs sm:text-sm font-semibold text-[#1e1b1c] group-hover:text-[#6b0d09] truncate">
+                      {pub.titulo}
                     </span>
                   </div>
                   <span className="material-symbols-outlined text-[18px] text-[#57423f]/50 group-hover:text-[#6b0d09]">
