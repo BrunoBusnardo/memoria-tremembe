@@ -1,0 +1,6 @@
+{
+  "name": "Estação da Memória: Tremembé",
+  "description": "Portal Historiográfico, Acervo Digital e Recursos Pedagógicos sobre a memória e o patrimônio de Tremembé e do Vale do Paraíba.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
