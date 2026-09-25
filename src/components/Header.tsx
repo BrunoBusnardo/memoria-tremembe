@@ -96,17 +96,17 @@ export const Header: React.FC<HeaderProps> = ({
         </nav>
 
         {/* Right Search & Profile Action */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <button
             onClick={onOpenSearch}
-            className="flex items-center bg-white px-3 py-1.5 rounded-lg border border-[#dec0bb] shadow-[0_1px_3px_rgba(35,31,32,0.04)] w-36 sm:w-56 lg:w-72 text-left hover:border-[#8b261d] transition-colors group"
+            className="flex items-center bg-white px-2 sm:px-3 py-1.5 rounded-lg border border-[#dec0bb] shadow-[0_1px_3px_rgba(35,31,32,0.04)] w-24 sm:w-52 lg:w-72 text-left hover:border-[#8b261d] transition-colors group"
             title="Pesquisar no Acervo (Atalho ⌘K)"
           >
-            <span className="material-symbols-outlined text-[18px] text-[#57423f] mr-2 group-hover:text-[#6b0d09]">
+            <span className="material-symbols-outlined text-[18px] text-[#57423f] mr-1.5 sm:mr-2 group-hover:text-[#6b0d09]">
               search
             </span>
             <span className="text-xs sm:text-sm text-[#57423f]/70 flex-grow truncate">
-              Pesquisar acervo ou fotos...
+              Pesquisar...
             </span>
             <kbd className="hidden sm:inline text-[10px] font-semibold text-[#57423f]/80 bg-[#efe6e7] px-1.5 py-0.5 rounded border border-[#dec0bb]/80 shadow-xs">
               ⌘K
@@ -114,7 +114,7 @@ export const Header: React.FC<HeaderProps> = ({
           </button>
 
           <div 
-            className="w-9 h-9 rounded-full bg-[#6b0d09] hover:bg-[#8b261d] text-white flex items-center justify-center flex-shrink-0 cursor-pointer shadow-sm transition-all"
+            className="hidden sm:flex w-9 h-9 rounded-full bg-[#6b0d09] hover:bg-[#8b261d] text-white items-center justify-center flex-shrink-0 cursor-pointer shadow-sm transition-all"
             title="Acesso de Pesquisadores & Docentes (NPH/UNITAU)"
           >
             <span className="material-symbols-outlined text-[20px]">person</span>
@@ -123,7 +123,7 @@ export const Header: React.FC<HeaderProps> = ({
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-lg text-[#57423f] hover:bg-[#efe6e7] hover:text-[#6b0d09] transition-colors"
+            className="lg:hidden p-2 rounded-lg text-[#57423f] hover:bg-[#efe6e7] hover:text-[#6b0d09] transition-colors flex-shrink-0"
             aria-label="Abrir menu móvel"
           >
             <span className="material-symbols-outlined text-[24px]">
